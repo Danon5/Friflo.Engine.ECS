@@ -3,9 +3,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Friflo.Json.Fliox;
-using Friflo.Json.Fliox.Mapper;
-using Friflo.Json.Fliox.Mapper.Map;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable once CheckNamespace
@@ -27,7 +24,6 @@ public abstract class ScriptType : SchemaType
     
 #region methods
     internal abstract   Script          CreateScript();
-    internal abstract   void            ReadScript  (ObjectReader reader, JsonValue json, Entity entity);
     
     [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070", Justification = "MemberwiseClone is part of BCL")]
     internal ScriptType(string scriptKey, int scriptIndex, Type type, bool isBlittable)
@@ -86,17 +82,6 @@ internal sealed class ScriptType<T> : ScriptType
         var name = typeof(T).Name;
         var msg = $"type: {typeof(T).Namespace}.{name} - expect: static void CopyScript({name} source, {name} target)";
         throw new MissingMethodException(msg);
-    }
-    
-    internal override void ReadScript(ObjectReader reader, JsonValue json, Entity entity) {
-        var mapper = (TypeMapper<T>)reader.TypeCache.GetTypeMapper(typeof(T));
-        var script = entity.GetScript<T>();
-        if (script != null) { 
-            reader.ReadToMapper(mapper, json, script, true);
-            return;
-        }
-        script = reader.ReadMapper(mapper, json);
-        entity.archetype.entityStore.extension.AppendScript(entity, script);
     }
     #endregion
 }

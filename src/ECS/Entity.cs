@@ -115,7 +115,6 @@ namespace Friflo.Engine.ECS;
 ///     <see cref="Pid"/>       <br/>
 ///     <see cref="Archetype"/> <br/>
 ///     <see cref="Store"/>     <br/>
-///     <see cref="DebugJSON"/> <br/>
 /// </item>
 /// <item>  <b>components</b> · generic             <br/>
 ///     <see cref="HasComponent{T}"/>               <br/>
@@ -176,7 +175,6 @@ namespace Friflo.Engine.ECS;
 /// </remarks>
 [CLSCompliant(true)]
 [StructLayout(LayoutKind.Explicit)]
-[Json.Fliox.TypeMapper(typeof(Serialize.TypeMapperEntity))]
 public readonly partial struct Entity : IEquatable<Entity>, IComparable<Entity>
 {
     // ------------------------------------ general properties ------------------------------------
@@ -232,12 +230,6 @@ public readonly partial struct Entity : IEquatable<Entity>, IComparable<Entity>
             return node.archetype == null || node.revision != Revision;
         }
     }
-    
-    /// <summary> Return the <b>JSON</b> representation of an entity. </summary>
-    /// <remarks> Counterpart of <see cref="Serialize.DataEntity.DebugJSON"/> </remarks>
-    // Assigning JSON in a Debugger does not change the entity state as a developer would expect. So setter is only internal.   
-    // ReSharper disable once InconsistentNaming
-    [Browse(Never)] public  string              DebugJSON { get => EntityUtils.EntityToJSON(this); internal set => EntityUtils.JsonToEntity(this, value);  }
     
     /// <summary> Display additional entity information like Pid, Enabled, JSON and attached event handlers.</summary>
                     internal EntityInfo         Info => new EntityInfo(this);

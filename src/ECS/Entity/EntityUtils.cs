@@ -4,8 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Friflo.Engine.ECS.Serialize;
-using Friflo.Json.Fliox;
 
 // ReSharper disable RedundantTypeDeclarationBody
 // ReSharper disable RedundantExplicitArrayCreation
@@ -146,45 +144,6 @@ public static class EntityUtils
             sb.Append(']');
         }
         return sb.ToString();
-    }
-
-    private static readonly EntitySerializer EntitySerializer   = new EntitySerializer();
-    
-    internal static string EntityToJSON(Entity entity)
-    {
-        var serializer = EntitySerializer;
-        lock (serializer) {
-            return serializer.WriteEntity(entity);
-        }
-    }
-    
-    /// <remarks> The "id" in the passed JSON <paramref name="value"/> is ignored. </remarks>
-    internal static void JsonToEntity(Entity entity, string value)
-    {
-        if (value == null) throw new ArgumentNullException(nameof(value));
-        var serializer = EntitySerializer;
-        lock (serializer) {
-            var jsonValue = new JsonValue(value);
-            var error = serializer.ReadIntoEntity(entity, jsonValue);
-            if (error == null) {
-                return;
-            }
-            throw new ArgumentException(error);
-        }
-    }
-    
-    private static readonly DataEntitySerializer DataEntitySerializer = new DataEntitySerializer();
-    
-    internal static string DataEntityToJSON(DataEntity dataEntity)
-    {
-        var serializer = DataEntitySerializer;
-        lock (serializer) {
-            var json = serializer.WriteDataEntity(dataEntity, out string error);
-            if (json == null) {
-                return error;
-            }
-            return json;
-        }
     }
     
     // ---------------------------------- Script utils ----------------------------------

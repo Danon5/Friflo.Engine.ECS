@@ -3,10 +3,6 @@
 
 using System;
 using Friflo.Engine.ECS.Index;
-using Friflo.Json.Burst;
-using Friflo.Json.Fliox;
-using Friflo.Json.Fliox.Mapper;
-using Friflo.Json.Fliox.Mapper.Map;
 
 // ReSharper disable StaticMemberInGenericType
 // ReSharper disable once CheckNamespace
@@ -118,18 +114,6 @@ internal sealed class StructHeap<T> : StructHeap, IComponentStash<T>
     /// - it allows only reading struct values
     /// </summary>
     internal override object GetComponentDebug(int compIndex) => components[compIndex];
-    
-    
-    internal override Bytes Write(ObjectWriter writer, int compIndex) {
-        var mapper = (TypeMapper<T>)writer.TypeCache.GetTypeMapper(typeof(T));
-        ref var value = ref components[compIndex];
-        return writer.WriteAsBytesMapper(value, mapper);
-    }
-    
-    internal override void Read(ObjectReader reader, int compIndex, JsonValue json) {
-        var mapper = (TypeMapper<T>)reader.TypeCache.GetTypeMapper(typeof(T));
-        components[compIndex] = reader.ReadMapper(mapper, json);  // todo avoid boxing within typeMapper, T is struct
-    }
     
     internal override  void UpdateIndex (Entity entity) {
         StoreIndex.UpdateIndex(entity.store, entity.Id, components[entity.compIndex], this);

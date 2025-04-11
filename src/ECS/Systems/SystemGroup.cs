@@ -7,7 +7,6 @@ using System.Collections;
 using System.Diagnostics;
 using System.Text;
 using Friflo.Engine.ECS.Utils;
-using Friflo.Json.Fliox;
 using static System.Diagnostics.DebuggerBrowsableState;
 using Browse = System.Diagnostics.DebuggerBrowsableAttribute;
 // Hard Rule! file must not have any dependency a to a specific game engine. E.g. Unity, Godot, Monogame, ...
@@ -46,10 +45,10 @@ public class SystemGroup : BaseSystem, IEnumerable
     #endregion
     
 #region fields
-    [Browse(Never)] [Serialize] private     string                      name;
+    [Browse(Never)]             private     string                      name;
     [Browse(Never)]             internal    ReadOnlyList<BaseSystem>    childSystems;
     [Browse(Never)]             internal    ReadOnlyList<CommandBuffer> commandBuffers;
-    [Browse(Never)] [Ignore]    private     bool                        monitorPerf;
+    [Browse(Never)]             private     bool                        monitorPerf;
     #endregion
     
 #region constructor

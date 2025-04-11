@@ -102,7 +102,6 @@ A type initializer threw an exception. To determine which type, inspect the Inne
         RegisterComponent<Scale3>();
         RegisterComponent<Transform>();
         RegisterComponent<TreeNode>();
-        RegisterComponent<Unresolved>();
         
         // indexed components
         RegisterIndexedComponentClass<UniqueEntity, string>();

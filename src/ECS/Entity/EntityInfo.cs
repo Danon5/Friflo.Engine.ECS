@@ -27,7 +27,6 @@ internal readonly struct EntityInfo
     internal            Archetype           Archetype       => entity.GetArchetype();
     internal            Scripts             Scripts         => entity.Scripts;
     internal            Entity              Parent          => entity.Parent;
-    internal            JSON                JSON            => new JSON(EntityUtils.EntityToJSON(entity));
     internal            DebugEventHandlers  EventHandlers   => EntityStore.GetEventHandlers(entity.store, entity.Id);
     internal            EntityLinks         IncomingLinks   => entity.GetAllIncomingLinks();
     internal            short               Revision        => entity.Revision;
