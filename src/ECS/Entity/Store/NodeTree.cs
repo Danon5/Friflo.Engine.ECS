@@ -50,15 +50,15 @@ public partial class EntityStore
         extension.randPid = new Random(seed);
     }
     
-    /// This message must be used if adding or removing ids from an entity <see cref="TreeNode"/>.
-    private static ref TreeNode GetTreeNodeRef(Entity entity)
+    /// This message must be used if adding or removing ids from an entity <see cref="TreeNodeCmp"/>.
+    private static ref TreeNodeCmp GetTreeNodeRef(Entity entity)
     {
-        var heap = entity.archetype.heapMap[StructInfo<TreeNode>.Index];
+        var heap = entity.archetype.heapMap[StructInfo<TreeNodeCmp>.Index];
         if (heap == null) {
-            entity.AddComponent<TreeNode>(); // set entity.archetype
-            heap = entity.archetype.heapMap[StructInfo<TreeNode>.Index];
+            entity.AddComponent<TreeNodeCmp>(); // set entity.archetype
+            heap = entity.archetype.heapMap[StructInfo<TreeNodeCmp>.Index];
         } 
-        return ref ((StructHeap<TreeNode>)heap).components[entity.compIndex];
+        return ref ((StructHeap<TreeNodeCmp>)heap).components[entity.compIndex];
     }
     
 #region get / set parent
@@ -268,7 +268,7 @@ public partial class EntityStore
     }
 
     // --- 1.
-    private void ChildIds_RemoveMissingIds(ReadOnlySpan<int> newIds, ref TreeNode node, int parentId)
+    private void ChildIds_RemoveMissingIds(ReadOnlySpan<int> newIds, ref TreeNodeCmp node, int parentId)
     {
         var newIdSet = idBufferSet;
         newIdSet.Clear();
@@ -288,7 +288,7 @@ public partial class EntityStore
     }
 
     // --- 2.
-    private void ChildIds_InsertNewIds(ReadOnlySpan<int> newIds, ref TreeNode node, int parentId)
+    private void ChildIds_InsertNewIds(ReadOnlySpan<int> newIds, ref TreeNodeCmp node, int parentId)
     {
         var curIdSet = idBufferSet;
         curIdSet.Clear();
@@ -310,7 +310,7 @@ public partial class EntityStore
     }
 
     // --- 3.1
-    private void ChildIds_GetRange(in TreeNode node, ReadOnlySpan<int> newIds, out int first, out int last)
+    private void ChildIds_GetRange(in TreeNodeCmp node, ReadOnlySpan<int> newIds, out int first, out int last)
     {
         var childIds    = node.GetChildIds(this);
         int count       = newIds.Length;
@@ -335,7 +335,7 @@ public partial class EntityStore
     }
     
     // --- 3.2
-    private void ChildIds_RemoveRange(ref TreeNode node, int first, int last, int parentId)
+    private void ChildIds_RemoveRange(ref TreeNodeCmp node, int first, int last, int parentId)
     {
         var heap = extension.childHeap;
         for (int index = last; index >= first; index--)
@@ -348,7 +348,7 @@ public partial class EntityStore
     }
     
     // --- 3.3
-    private void ChildIds_InsertRange(ref TreeNode node, int first, int last, ReadOnlySpan<int> newIds, int parentId)
+    private void ChildIds_InsertRange(ref TreeNodeCmp node, int first, int last, ReadOnlySpan<int> newIds, int parentId)
     {
         var heap = extension.childHeap;
         for (int index = first; index <= last; index++)
@@ -359,7 +359,7 @@ public partial class EntityStore
         }
     }
 
-    private void SetChildParents(in TreeNode node, int parentId)
+    private void SetChildParents(in TreeNodeCmp node, int parentId)
     {
         foreach (int childId in node.GetChildIds(this))
         {

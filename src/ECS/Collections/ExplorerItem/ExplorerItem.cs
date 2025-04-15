@@ -90,15 +90,15 @@ public sealed class ExplorerItem :
     
     private void SetName(string value)
     {
-        entity.TryGetComponent<EntityName>(out var name);
+        entity.TryGetComponent<EntityNameCmp>(out var name);
         if (name.value == value) {
             return;
         }
         if (string.IsNullOrEmpty(value) || value == tree.defaultEntityName) {
-            entity.RemoveComponent<EntityName>();
+            entity.RemoveComponent<EntityNameCmp>();
             return;
         }
-        entity.AddComponent(new EntityName(value));
+        entity.AddComponent(new EntityNameCmp(value));
     }
     
     private void SetExpanded(bool value) {

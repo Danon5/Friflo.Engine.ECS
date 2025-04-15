@@ -9,7 +9,7 @@ using Friflo.Engine.ECS.Collections;
 namespace Friflo.Engine.ECS;
 
 /// <summary>
-/// A <see cref="TreeNode"/> component stores the <see cref="Entity.ChildEntities"/> of an <see cref="Entity"/>.<br/>
+/// A <see cref="TreeNodeCmp"/> component stores the <see cref="Entity.ChildEntities"/> of an <see cref="Entity"/>.<br/>
 /// It is used to build up an entity hierarchy used for scene graphs. 
 /// </summary>
 /// <remarks>
@@ -22,7 +22,7 @@ namespace Friflo.Engine.ECS;
 /// If these array buffers grown large enough over time no heap allocations will happen if adding or removing child entities.<br/>
 /// </remarks>
 [ComponentKey(null)]
-public struct TreeNode : IComponent
+public struct TreeNodeCmp : IComponent
 {
 #region properties
     /// <summary> Returns the number of <see cref="Entity.ChildEntities"/>.</summary>

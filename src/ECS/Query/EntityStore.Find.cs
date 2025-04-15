@@ -9,20 +9,20 @@ namespace Friflo.Engine.ECS;
 public partial class EntityStoreBase
 {
     /// <summary>
-    /// Return the entity with a <see cref="UniqueEntity"/> component and its <see cref="UniqueEntity.uid"/> == <paramref name="uid"/>.<br/>
+    /// Return the entity with a <see cref="UniqueEntityCmp"/> component and its <see cref="UniqueEntityCmp.uid"/> == <paramref name="uid"/>.<br/>
     /// See <a href="https://friflo.gitbook.io/friflo.engine.ecs/documentation/entity#unique-entity">Example.</a>
     /// </summary>
     /// <exception cref="InvalidOperationException">
-    /// In case none or more than one <see cref="UniqueEntity"/> with the given <paramref name="uid"/> found.
+    /// In case none or more than one <see cref="UniqueEntityCmp"/> with the given <paramref name="uid"/> found.
     /// </exception>
     /// <remarks>
-    /// To Get all <see cref="UniqueEntity"/>'s of the store use <see cref="UniqueEntities"/>.
+    /// To Get all <see cref="UniqueEntityCmp"/>'s of the store use <see cref="UniqueEntities"/>.
     /// </remarks>
     public Entity GetUniqueEntity(string uid)
     {
         // var index    = internBase.uniqueEntityIndex ??= CreateUniqueEntityIndex();
         // var entities = index.GetHasValueEntities(uid);
-        var index = ((EntityStore)this).ComponentIndex<UniqueEntity, string>();
+        var index = ((EntityStore)this).ComponentIndex<UniqueEntityCmp, string>();
         var entities = index[uid];
         switch (entities.Count) {
             case 1:
@@ -40,13 +40,13 @@ public partial class EntityStoreBase
         return query.Entities;
     }
     
-    private ArchetypeQuery<UniqueEntity> CreateUniqueEntityQuery() => Query<UniqueEntity>().WithDisabled();
+    private ArchetypeQuery<UniqueEntityCmp> CreateUniqueEntityQuery() => Query<UniqueEntityCmp>().WithDisabled();
     
     private static InvalidOperationException FoundNoUniqueEntity(string name) {
-        return new InvalidOperationException($"found no {nameof(UniqueEntity)} with uid: \"{name}\"");
+        return new InvalidOperationException($"found no {nameof(UniqueEntityCmp)} with uid: \"{name}\"");
     }
 
     private static InvalidOperationException MultipleEntitiesWithSameName(string uid) {
-        return new InvalidOperationException($"found multiple {nameof(UniqueEntity)}'s with uid: \"{uid}\"");
+        return new InvalidOperationException($"found multiple {nameof(UniqueEntityCmp)}'s with uid: \"{uid}\"");
     }
 }

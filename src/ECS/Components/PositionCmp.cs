@@ -11,9 +11,10 @@ using Browse = System.Diagnostics.DebuggerBrowsableAttribute;
 // ReSharper disable once CheckNamespace
 namespace Friflo.Engine.ECS;
 
-[ComponentKey("scl3")]
+[ComponentKey("pos")]
 [StructLayout(LayoutKind.Explicit)]
-public struct Scale3 : IComponent, IEquatable<Scale3>
+[ComponentSymbol("P",  "0, 170, 0")]
+public struct  PositionCmp : IComponent, IEquatable<PositionCmp>
 {
     [Browse(Never)]
     [FieldOffset(0)] public     Vector3 value;  // 12
@@ -24,15 +25,15 @@ public struct Scale3 : IComponent, IEquatable<Scale3>
 
     public readonly override string ToString() => $"{x}, {y}, {z}";
 
-    public Scale3 (float x, float y, float z) {
+    public PositionCmp (float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
     
-    public          bool    Equals      (Scale3 other)                  => value == other.value;
-    public static   bool    operator == (in Scale3 p1, in Scale3 p2)    => p1.value == p2.value;
-    public static   bool    operator != (in Scale3 p1, in Scale3 p2)    => p1.value != p2.value;
+    public          bool    Equals      (PositionCmp other)                    => value == other.value;
+    public static   bool    operator == (in PositionCmp p1, in PositionCmp p2)    => p1.value == p2.value;
+    public static   bool    operator != (in PositionCmp p1, in PositionCmp p2)    => p1.value != p2.value;
 
     [ExcludeFromCodeCoverage] public override   int     GetHashCode()       => throw new NotImplementedException("to avoid boxing");
     [ExcludeFromCodeCoverage] public override   bool    Equals(object obj)  => throw new NotImplementedException("to avoid boxing");

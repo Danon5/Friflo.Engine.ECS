@@ -22,7 +22,7 @@ namespace Friflo.Engine.ECS;
 /// See <a href="https://friflo.gitbook.io/friflo.engine.ecs/documentation/entity#archetype">Example.</a>
 /// </summary>
 /// <remarks>
-/// E.g. all entities with a <see cref="Position"/> and <see cref="Rotation"/> component are store in the same archetype.<br/>
+/// E.g. all entities with a <see cref="PositionCmp"/> and <see cref="RotationCmp"/> component are store in the same archetype.<br/>
 /// In case of removing one of these components or adding a new one from / to an <see cref="Entity"/> the entity is moved to a different archetype.<br/>
 /// <br/>
 /// This is the basic pattern for an archetype base ECS. This approach enables efficient entity / component queries.<br/>
@@ -227,14 +227,14 @@ public sealed class Archetype
     private static void SetStandardComponentHeaps(StructHeap heap, ref StandardComponents std)
     {
         var type = heap.StructType;
-        if        (type == typeof(Position)) {
-            std.position    = (StructHeap<Position>)    heap;
-        } else if (type == typeof(Rotation)) {
-            std.rotation    = (StructHeap<Rotation>)    heap;
-        } else if (type == typeof(Scale3)) {
-            std.scale3      = (StructHeap<Scale3>)      heap;
-        } else if (type == typeof(EntityName)) {
-            std.name        = (StructHeap<EntityName>)  heap;
+        if        (type == typeof(PositionCmp)) {
+            std.position    = (StructHeap<PositionCmp>)    heap;
+        } else if (type == typeof(RotationCmp)) {
+            std.rotation    = (StructHeap<RotationCmp>)    heap;
+        } else if (type == typeof(Scale3Cmp)) {
+            std.scale3      = (StructHeap<Scale3Cmp>)      heap;
+        } else if (type == typeof(EntityNameCmp)) {
+            std.name        = (StructHeap<EntityNameCmp>)  heap;
         }
     }
 
@@ -308,7 +308,7 @@ public sealed class Archetype
     }
     
     /// <summary>
-    /// <see cref="TreeNode"/> components (child entities) are not copied.<br/>
+    /// <see cref="TreeNodeCmp"/> components (child entities) are not copied.<br/>
     /// Otherwise, two different entities would have the same child entities.
     /// </summary>
     internal static void CopyComponents(Archetype sourceArch, Archetype targetArch, in CopyContext context, long updateIndexTypes)

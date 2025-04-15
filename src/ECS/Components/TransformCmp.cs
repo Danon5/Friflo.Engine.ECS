@@ -11,7 +11,7 @@ namespace Friflo.Engine.ECS;
 
 [ComponentKey("trans")]
 [StructLayout(LayoutKind.Explicit)]
-public struct  Transform : IComponent
+public struct  TransformCmp : IComponent
 {
     [Browse(Never)]
     [FieldOffset (0)] public    Matrix4x4   value;  // 64

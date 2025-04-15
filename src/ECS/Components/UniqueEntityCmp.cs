@@ -8,15 +8,15 @@ namespace Friflo.Engine.ECS;
 
 
 /// <summary>
-/// A <see cref="UniqueEntity"/> is used to assign a unique <c>string</c> to an entity within an <see cref="EntityStore"/>.
+/// A <see cref="UniqueEntityCmp"/> is used to assign a unique <c>string</c> to an entity within an <see cref="EntityStore"/>.
 /// </summary>
 /// <remarks>
-/// To find a <see cref="UniqueEntity"/> within an <see cref="EntityStore"/> use <see cref="EntityStoreBase.GetUniqueEntity"/>.<br/>
+/// To find a <see cref="UniqueEntityCmp"/> within an <see cref="EntityStore"/> use <see cref="EntityStoreBase.GetUniqueEntity"/>.<br/>
 /// It basically acts as a singleton within an <see cref="EntityStore"/>. 
 /// </remarks>
 [ComponentKey("unique")]
 [ComponentSymbol("UQ",  "255,145,0")]
-public readonly struct UniqueEntity : IIndexedComponent<string>
+public readonly struct UniqueEntityCmp : IIndexedComponent<string>
 {
     /// <summary>Unique string identifier assigned to specific <see cref="Entity"/></summary>
     public readonly string  uid;  //  8
@@ -24,7 +24,7 @@ public readonly struct UniqueEntity : IIndexedComponent<string>
     public          string  GetIndexedValue() => uid;
     public override string  ToString()        => $"UniqueEntity: '{uid}'";
     
-    public UniqueEntity (string uid) {
+    public UniqueEntityCmp (string uid) {
         this.uid = uid;
     }
 }

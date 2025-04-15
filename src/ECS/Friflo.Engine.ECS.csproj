@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>library</OutputType>
-    <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.1</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <RootNamespace>Friflo.Engine.ECS</RootNamespace>
@@ -33,6 +32,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedAllSources>true</EmbedAllSources>
+    <TargetFrameworks>net9.0;netstandard2.1</TargetFrameworks>
     <!-- packaging: end -->
   </PropertyGroup>
 
@@ -74,4 +74,8 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
   </ItemGroup>
 
+    <PropertyGroup>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+    
 </Project>

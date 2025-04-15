@@ -151,15 +151,15 @@ internal class ChunkDebugView<T>
 
 public static class ChunkExtensions
 {
-    public static Span<Vector3>     AsSpanVector3   (this Span <Position>  position)    => MemoryMarshal.Cast<Position, Vector3>    (position);
-    public static Span<Vector3>     AsSpanVector3   (this Chunk<Position>  position)    => MemoryMarshal.Cast<Position, Vector3>    (position   .Span);
+    public static Span<Vector3>     AsSpanVector3   (this Span <PositionCmp>  position)    => MemoryMarshal.Cast<PositionCmp, Vector3>    (position);
+    public static Span<Vector3>     AsSpanVector3   (this Chunk<PositionCmp>  position)    => MemoryMarshal.Cast<PositionCmp, Vector3>    (position   .Span);
     //
-    public static Span<Quaternion>  AsSpanQuaternion(this Span <Rotation>  rotation)    => MemoryMarshal.Cast<Rotation, Quaternion> (rotation);
-    public static Span<Quaternion>  AsSpanQuaternion(this Chunk<Rotation>  rotation)    => MemoryMarshal.Cast<Rotation, Quaternion> (rotation   .Span);
+    public static Span<Quaternion>  AsSpanQuaternion(this Span <RotationCmp>  rotation)    => MemoryMarshal.Cast<RotationCmp, Quaternion> (rotation);
+    public static Span<Quaternion>  AsSpanQuaternion(this Chunk<RotationCmp>  rotation)    => MemoryMarshal.Cast<RotationCmp, Quaternion> (rotation   .Span);
     //    
-    public static Span<Vector3>     AsSpanVector3   (this Span <Scale3>    scale)       => MemoryMarshal.Cast<Scale3,   Vector3>    (scale);
-    public static Span<Vector3>     AsSpanVector3   (this Chunk<Scale3>    scale)       => MemoryMarshal.Cast<Scale3,   Vector3>    (scale      .Span);
+    public static Span<Vector3>     AsSpanVector3   (this Span <Scale3Cmp>    scale)       => MemoryMarshal.Cast<Scale3Cmp,   Vector3>    (scale);
+    public static Span<Vector3>     AsSpanVector3   (this Chunk<Scale3Cmp>    scale)       => MemoryMarshal.Cast<Scale3Cmp,   Vector3>    (scale      .Span);
     //
-    public static Span<Matrix4x4>   AsSpanMatrix4x4 (this Span <Transform> transform)   => MemoryMarshal.Cast<Transform,Matrix4x4>  (transform);
-    public static Span<Matrix4x4>   AsSpanMatrix4x4 (this Chunk<Transform> transform)   => MemoryMarshal.Cast<Transform,Matrix4x4>  (transform  .Span);
+    public static Span<Matrix4x4>   AsSpanMatrix4x4 (this Span <TransformCmp> transform)   => MemoryMarshal.Cast<TransformCmp,Matrix4x4>  (transform);
+    public static Span<Matrix4x4>   AsSpanMatrix4x4 (this Chunk<TransformCmp> transform)   => MemoryMarshal.Cast<TransformCmp,Matrix4x4>  (transform  .Span);
 }

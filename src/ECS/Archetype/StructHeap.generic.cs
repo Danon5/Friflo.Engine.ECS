@@ -71,7 +71,7 @@ internal sealed class StructHeap<T> : StructHeap, IComponentStash<T>
     
     internal override void CopyComponent(int sourcePos, StructHeap targetHeap, int targetPos, in CopyContext context, long updateIndexTypes)
     {
-        if (typeof(T) == typeof(TreeNode)) {
+        if (typeof(T) == typeof(TreeNodeCmp)) {
             return;
         }
         var copyValue       = CopyValueUtils<T>.CopyValue;

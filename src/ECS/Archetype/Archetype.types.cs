@@ -8,10 +8,10 @@ namespace Friflo.Engine.ECS;
 
 internal struct StandardComponents
 {
-    internal    StructHeap<Position>    position;   // 8
-    internal    StructHeap<Rotation>    rotation;   // 8
-    internal    StructHeap<Scale3>      scale3;     // 8
-    internal    StructHeap<EntityName>  name;       // 8
+    internal    StructHeap<PositionCmp>    position;   // 8
+    internal    StructHeap<RotationCmp>    rotation;   // 8
+    internal    StructHeap<Scale3Cmp>      scale3;     // 8
+    internal    StructHeap<EntityNameCmp>  name;       // 8
 }
 
 internal readonly struct ArchetypeConfig

@@ -13,7 +13,7 @@ namespace Friflo.Engine.ECS;
 /// </summary>
 [ComponentKey("name")]
 [ComponentSymbol("N", "0,0,0")]
-public struct EntityName : IComponent
+public struct EntityNameCmp : IComponent
 {
     /// <summary>Descriptive entity name for debugging or in an editor.</summary>
                     public  string  value;  //  8
@@ -22,7 +22,7 @@ public struct EntityName : IComponent
     
     public override         string  ToString() => $"'{value}'";
 
-    public EntityName (string value) {
+    public EntityNameCmp (string value) {
         this.value = value;
     }
 }

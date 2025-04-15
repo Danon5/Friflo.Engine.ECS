@@ -18,7 +18,7 @@ namespace Friflo.Engine.ECS;
 [ComponentKey("rot")]
 [StructLayout(LayoutKind.Explicit)]
 [ComponentSymbol("Rℍ")] // ℍ = Hamilton
-public struct  Rotation : IComponent, IEquatable<Rotation>
+public struct  RotationCmp : IComponent, IEquatable<RotationCmp>
 {
     [Browse(Never)]
     [FieldOffset (0)] public    Quaternion  value;  // 16
@@ -30,16 +30,16 @@ public struct  Rotation : IComponent, IEquatable<Rotation>
     
     public readonly override string ToString() => $"{x}, {y}, {z}, {w}";
     
-    public Rotation (float x, float y, float z, float w) {
+    public RotationCmp (float x, float y, float z, float w) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.w = w;
     }
     
-    public          bool    Equals      (Rotation other)                    => value == other.value;
-    public static   bool    operator == (in Rotation p1, in Rotation p2)    => p1.value == p2.value;
-    public static   bool    operator != (in Rotation p1, in Rotation p2)    => p1.value != p2.value;
+    public          bool    Equals      (RotationCmp other)                    => value == other.value;
+    public static   bool    operator == (in RotationCmp p1, in RotationCmp p2)    => p1.value == p2.value;
+    public static   bool    operator != (in RotationCmp p1, in RotationCmp p2)    => p1.value != p2.value;
 
     [ExcludeFromCodeCoverage] public override   int     GetHashCode()       => throw new NotImplementedException("to avoid boxing");
     [ExcludeFromCodeCoverage] public override   bool    Equals(object obj)  => throw new NotImplementedException("to avoid boxing");

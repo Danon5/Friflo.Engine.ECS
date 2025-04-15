@@ -11,7 +11,7 @@ namespace Friflo.Engine.ECS;
 /// See <a href="https://friflo.gitbook.io/friflo.engine.ecs/documentation/entity#tag">Example.</a>
 /// </summary>
 /// <remarks>
-/// In case you want to find a unique entity add the component <see cref="UniqueEntity"/> to an entity<br/>
+/// In case you want to find a unique entity add the component <see cref="UniqueEntityCmp"/> to an entity<br/>
 /// and use <see cref="EntityStoreBase.GetUniqueEntity"/> to query for this entity.<br/>
 /// <br/>
 /// Optionally attribute the implementing struct with <see cref="TagNameAttribute"/><br/>

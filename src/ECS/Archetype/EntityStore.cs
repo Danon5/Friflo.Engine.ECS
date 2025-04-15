@@ -50,7 +50,7 @@ public abstract partial class EntityStoreBase
     /// <summary> Return the sum of all Archetype capacities. </summary>
     [Browse(Never)] public              long                    CapacitySumArchetypes => internBase.archetypesCapacity;
     
-    /// <summary>Return all <see cref="UniqueEntity"/>'s in the entity store </summary>
+    /// <summary>Return all <see cref="UniqueEntityCmp"/>'s in the entity store </summary>
                     public              QueryEntities           UniqueEntities  => GetUniqueEntities();
     
     [Browse(Never)] internal     Action<ComponentChanged>       ComponentAdded  => internBase.componentAdded;
@@ -107,7 +107,7 @@ public abstract partial class EntityStoreBase
         internal        Dictionary<int, Action<ComponentChanged>>   entityComponentChanged; //  8   - entity event handlers for add/remove component
         //
         ///  reused query for <see cref="EntityStoreBase.GetUniqueEntity"/>
-        internal        ArchetypeQuery<UniqueEntity>                uniqueEntityQuery;      //  8
+        internal        ArchetypeQuery<UniqueEntityCmp>                uniqueEntityQuery;      //  8
         internal        StackArray<EntityBatch>                     entityBatches;          //  8
         internal        StackArray<CreateEntityBatch>               createEntityBatches;    //  8
         internal        StackArray<EntityList>                      entityLists;            //  8

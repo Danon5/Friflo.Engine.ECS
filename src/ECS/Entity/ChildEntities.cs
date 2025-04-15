@@ -16,7 +16,7 @@ namespace Friflo.Engine.ECS;
 
 /// <summary>
 /// Return the child entities of an <see cref="Entity"/>.<br/>
-/// To iterate all entities with child entities use <see cref="TreeNode"/> in a <c>Query()</c>.
+/// To iterate all entities with child entities use <see cref="TreeNodeCmp"/> in a <c>Query()</c>.
 /// </summary>
 [DebuggerTypeProxy(typeof(ChildEntitiesDebugView))]
 public readonly struct ChildEntities : IEnumerable<Entity>
@@ -30,7 +30,7 @@ public readonly struct ChildEntities : IEnumerable<Entity>
     #endregion
     
 #region fields
-    [Browse(Never)]     internal readonly   TreeNode            node;   //  8
+    [Browse(Never)]     internal readonly   TreeNodeCmp            node;   //  8
     [Browse(Never)]     internal readonly   EntityStore         store;  //  8
     #endregion
     
@@ -48,7 +48,7 @@ public readonly struct ChildEntities : IEnumerable<Entity>
         entity.TryGetTreeNode(out node);
     }
     
-    internal ChildEntities(EntityStore store, TreeNode node) {
+    internal ChildEntities(EntityStore store, TreeNodeCmp node) {
         this.store  = store;
         this.node   = node;
     }

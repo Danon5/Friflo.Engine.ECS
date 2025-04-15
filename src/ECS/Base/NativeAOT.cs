@@ -96,15 +96,15 @@ A type initializer threw an exception. To determine which type, inspect the Inne
         engineTypesRegistered = true;
 
         // components
-        RegisterComponent<EntityName>();
-        RegisterComponent<Position>();
-        RegisterComponent<Rotation>();
-        RegisterComponent<Scale3>();
-        RegisterComponent<Transform>();
-        RegisterComponent<TreeNode>();
+        RegisterComponent<EntityNameCmp>();
+        RegisterComponent<PositionCmp>();
+        RegisterComponent<RotationCmp>();
+        RegisterComponent<Scale3Cmp>();
+        RegisterComponent<TransformCmp>();
+        RegisterComponent<TreeNodeCmp>();
         
         // indexed components
-        RegisterIndexedComponentClass<UniqueEntity, string>();
+        RegisterIndexedComponentClass<UniqueEntityCmp, string>();
 
         RegisterTag<Disabled>();
     }

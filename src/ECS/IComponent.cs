@@ -18,12 +18,12 @@ namespace Friflo.Engine.ECS;
 /// <br/>
 /// Common game specific <see cref="IComponent"/> types defined by the Engine:
 /// <list type="bullet">
-///     <item><see cref="EntityName"/></item>
-///     <item><see cref="UniqueEntity"/></item>
-///     <item><see cref="Position"/></item>
-///     <item><see cref="Rotation"/></item>
-///     <item><see cref="Scale3"/></item>
-///     <item><see cref="Transform"/></item>
+///     <item><see cref="EntityNameCmp"/></item>
+///     <item><see cref="UniqueEntityCmp"/></item>
+///     <item><see cref="PositionCmp"/></item>
+///     <item><see cref="RotationCmp"/></item>
+///     <item><see cref="Scale3Cmp"/></item>
+///     <item><see cref="TransformCmp"/></item>
 /// </list>
 /// </remarks>
 public interface IComponent { }
