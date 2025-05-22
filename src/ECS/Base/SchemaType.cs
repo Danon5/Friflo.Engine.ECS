@@ -98,14 +98,9 @@ public abstract class SchemaType
         types.Add(typeof(float),        blittable);
         types.Add(typeof(double),       blittable);
         //
-<<<<<<< HEAD
         types.Add(typeof(Guid),         blittable);
         types.Add(typeof(DateTime),     blittable);
         types.Add(typeof(BigInteger),   blittable);
-        //
-=======
-        types.Add(typeof(JsonValue),    blittable);
->>>>>>> 531ca009db4578f89e87fa86f44c77eb729c0f09
         types.Add(typeof(Entity),       blittable);
         // immutable value types in BCL:   https://stackoverflow.com/questions/31721466/examples-of-immutable-types-in-net
         types.Add(typeof(Guid),             blittable);
