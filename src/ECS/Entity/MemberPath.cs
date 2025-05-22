@@ -35,7 +35,7 @@ internal readonly struct MemberPathKey : IEquatable<MemberPathKey>
 
 public delegate TField MemberPathGetter<T, out TField> (in T root);
 public delegate void   MemberPathSetter<T, in  TField> (ref T root, TField value);
-
+public delegate void   OnMemberChanged<T>(ref T value, Entity entity, string path, in T old);
 
 /// <summary>
 /// Identifies a specific field / property by its <see cref="path"/> within a specific <see cref="Type"/>.<br/>
@@ -128,6 +128,7 @@ public sealed class MemberPath
         bool canWrite   = true;
         bool canRead    = true;
         MemberInfo memberInfo = null;
+        var leafIndex = pathItems.Length - 1;
         for (int i = 0; i < pathItems.Length; i++)
         {
             var memberName      = pathItems[i];
@@ -140,12 +141,16 @@ public sealed class MemberPath
             if (memberInfo is FieldInfo fieldInfo) {
                 memberType = fieldInfo.FieldType;
                 if (fieldInfo.IsInitOnly) {
-                    canWrite = false;
+                    if (i == leafIndex || memberType.IsValueType) {
+                        canWrite = false;
+                    }
                 }
             } else if (memberInfo is PropertyInfo propertyInfo) {
                 memberType = propertyInfo.PropertyType;
                 if (!propertyInfo.CanWrite) {
-                    canWrite = false;
+                    if (i == leafIndex || memberType.IsValueType) {
+                        canWrite = false;
+                    }
                 }
             }
             if (IsInvalidType(memberType)) {
@@ -184,8 +189,9 @@ public sealed class MemberPath
     // See ThrowIfTypeNeverValidGenericArgument() at:
     // https://github.com/dotnet/runtime/blob/4f5c6938d09e935830492c006aa8381611b65ad8/src/libraries/System.Private.CoreLib/src/System/RuntimeType.cs#L736
     private static bool IsInvalidType(Type type) {
-        return type.IsPointer || type.IsByRef || type == typeof(void);
-    } 
+        return  type.IsPointer || type.IsByRef || type == typeof(void) ||
+                type.IsByRefLike; // type is a ref struct. E.g. Span<>
+    }
     
     // ReSharper disable UnusedMember.Local
     [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "Not called for NativeAOT")]

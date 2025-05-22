@@ -41,9 +41,13 @@ public static class EntityUtils
         return type.heapMap[memberPath.structIndex].GetComponentMember(entity.compIndex, memberPath, out value, out exception);
     }
     
-    public static  bool   SetEntityComponentMember<TField>(Entity entity, MemberPath memberPath, TField value, out Exception exception) {
+    /// <summary>
+    /// <paramref name="onMemberChanged"/> can be null or must be of type <see cref="OnMemberChanged{T}"/>
+    /// with T = <see cref="MemberPath.componentType"/>
+    /// </summary>
+    public static  bool   SetEntityComponentMember<TField>(Entity entity, MemberPath memberPath, TField value, Delegate onMemberChanged, out Exception exception) {
         var type = entity.GetArchetype() ?? throw EntityStoreBase.EntityArgumentNullException(entity, nameof(entity));
-        return type.heapMap[memberPath.structIndex].SetComponentMember(entity.compIndex, memberPath, value, out exception);
+        return type.heapMap[memberPath.structIndex].SetComponentMember(entity, memberPath, value, onMemberChanged, out exception);
     }
 
     public static  bool RemoveEntityComponent (Entity entity, ComponentType componentType)
@@ -82,6 +86,19 @@ public static class EntityUtils
     
     public static   Script      AddEntityScript    (Entity entity, Script script)         => AddScript       (entity, script);
 
+    #endregion
+    
+#region relations
+    public static ComponentTypes GetRelationTypes(Entity entity)
+    {
+        var isOwner = entity.store.nodes[entity.Id].isOwner; 
+        if (isOwner == 0) {
+            return default;
+        }
+        ComponentTypes relationTypes = new ComponentTypes();
+        relationTypes.bitSet.l0 = isOwner & EntityStoreBase.Static.EntitySchema.relationTypes.bitSet.l0;
+        return relationTypes;
+    }
     #endregion
     
     // ------------------------------------------- internal methods -------------------------------------------

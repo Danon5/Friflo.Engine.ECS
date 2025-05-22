@@ -29,7 +29,7 @@ public abstract class ComponentType : SchemaType, IComparable<ComponentType>
     
     internal readonly   Type        RelationType;   //  8
     
-    internal readonly   Type        RelationKeyType;//  8
+    public   readonly   Type        RelationKeyType;//  8
     
     internal            int         nameSortOrder;  //  4
     #endregion
@@ -92,7 +92,7 @@ internal sealed class ComponentType<T> : ComponentType
     }
     
     internal override bool AddEntityComponent(Entity entity) {
-        return entity.AddComponent<T>(default);
+        return entity.AddComponent(new T());
     }
     
     internal override bool AddEntityComponentValue(Entity entity, object value) {
@@ -128,6 +128,46 @@ internal sealed class RelationType<T> : ComponentType
     {
     }
     
+<<<<<<< HEAD
+=======
+    internal override void WriteRelations(ComponentWriter writer, Entity entity)
+    {
+        var relations = entity.GetRelations<T>();
+        int length = relations.Length;
+        if (length == 0) {
+            return;
+        }
+        var heap = entity.store.extension.relationsMap?[StructInfo<T>.Index].heap;
+        var isFirst = true;
+        
+        writer.writer.MemberArrayStart(componentKeyBytes.AsSpan());
+        var pretty = writer.writer.Pretty;
+        writer.writer.SetPretty(false);  // prevent line wrap when writing array end ']'
+
+        for (int n = 0; n < length; n++){
+            if (isFirst) {
+                isFirst = false;                
+            } else {
+                writer.writer.json.AppendChar(',');
+            }
+            var position = relations.GetPosition(n);
+            var bytes = heap!.Write(writer.componentWriter, position);
+            writer.writer.json.AppendBytes(bytes);
+        }
+        writer.writer.ArrayEnd();
+        writer.writer.SetPretty(pretty);
+    }
+    
+    internal override void ReadRelation(ComponentReader reader, Entity entity, JsonValue json)
+    {
+        var relation = reader.componentReader.Read<T>(json);
+        if (reader.componentReader.Error.ErrSet) {
+            return;
+        }
+        AbstractEntityRelations.AddRelation(entity.store, entity.Id, relation);
+    }
+    
+>>>>>>> 531ca009db4578f89e87fa86f44c77eb729c0f09
     internal override StructHeap CreateHeap() {
         return new StructHeap<T>(StructIndex);
     }
