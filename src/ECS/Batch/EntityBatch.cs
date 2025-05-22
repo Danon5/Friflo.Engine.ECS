@@ -293,7 +293,7 @@ public sealed class  EntityBatch
 
     /// <summary>
     /// Disables an entity.<br/>
-    /// <see cref="Disabled"/> entities are not included query results.
+    /// <see cref="DisabledTag"/> entities are not included query results.
     /// To include them use <see cref="ArchetypeQuery.WithDisabled"/>.
     /// </summary>
     public EntityBatch Disable()    => AddTags(EntityUtils.Disabled);

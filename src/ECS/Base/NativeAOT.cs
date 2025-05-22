@@ -106,7 +106,7 @@ A type initializer threw an exception. To determine which type, inspect the Inne
         // indexed components
         RegisterIndexedComponentClass<UniqueEntityCmp, string>();
 
-        RegisterTag<Disabled>();
+        RegisterTag<DisabledTag>();
     }
     
     private void AddType(Type type, SchemaTypeKind kind)

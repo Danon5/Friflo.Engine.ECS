@@ -14,7 +14,7 @@ namespace Friflo.Engine.ECS;
 
 /// <summary>
 /// <see cref="ArchetypeQuery"/> and all its generic implementations are designed to be reused.<br/>
-/// By default, a query does not contain <see cref="Disabled"/> entities. Use <see cref="WithDisabled"/> if needed.<br/>
+/// By default, a query does not contain <see cref="DisabledTag"/> entities. Use <see cref="WithDisabled"/> if needed.<br/>
 /// See <a href="https://friflo.gitbook.io/friflo.engine.ecs/documentation/query">Example.</a>
 /// </summary>
 public class ArchetypeQuery
@@ -110,7 +110,7 @@ public class ArchetypeQuery
     /// <param name="tags"> Use <c>Tags.Get&lt;>()</c> to set the parameter. </param>
     public ArchetypeQuery   AnyTags         (in Tags tags) { SetHasAnyTags(tags); return this; }
     
-    /// <summary> A query result will contain <see cref="Disabled"/> entities. </summary>
+    /// <summary> A query result will contain <see cref="DisabledTag"/> entities. </summary>
     public ArchetypeQuery   WithDisabled    ()             { SetWithDisabled(); return this; }
 
     
@@ -209,7 +209,7 @@ public class ArchetypeQuery
     
     /// <summary>
     /// Called by generic ArchetypeQuery constructors. <br/>
-    /// <see cref="Disabled"/> entities excluded by default.
+    /// <see cref="DisabledTag"/> entities excluded by default.
     /// </summary>
     internal ArchetypeQuery(EntityStoreBase store, in SignatureIndexes indexes, QueryFilter filter, ComponentType relationType)
     {
@@ -225,7 +225,7 @@ public class ArchetypeQuery
     
     /// <summary>
     /// Called by <see cref="EntityStoreBase.Query()"/>. <br/>
-    /// <see cref="Disabled"/> entities excluded by default.
+    /// <see cref="DisabledTag"/> entities excluded by default.
     /// </summary>
     internal ArchetypeQuery(EntityStoreBase store, in ComponentTypes componentTypes, QueryFilter filter)
     {

@@ -235,7 +235,7 @@ public readonly partial struct Entity : IEquatable<Entity>, IComparable<Entity>
                     internal EntityInfo         Info => new EntityInfo(this);
     
     /// <summary>
-    /// Set entity to enabled/disabled by removing/adding the <see cref="Disabled"/> tag.<br/>
+    /// Set entity to enabled/disabled by removing/adding the <see cref="DisabledTag"/> tag.<br/>
     /// </summary>
     [Browse(Never)] public   bool               Enabled
                     { get => !Tags.HasAll(EntityUtils.Disabled); set { if (value) RemoveTags(EntityUtils.Disabled); else AddTags(EntityUtils.Disabled); } }

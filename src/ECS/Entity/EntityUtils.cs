@@ -148,7 +148,7 @@ public static class EntityUtils
     
     // ---------------------------------- Script utils ----------------------------------
     private  static readonly Script[]                       EmptyScripts        = Array.Empty<Script>();
-    internal static readonly Tags                           Disabled            = Tags.Get<Disabled>();
+    internal static readonly Tags                           Disabled            = Tags.Get<DisabledTag>();
     private  static readonly ScriptType[]                   ScriptTypes         = EntityStoreBase.Static.EntitySchema.scripts;
     private  static readonly Dictionary<Type, ScriptType>   ScriptTypeByType    = EntityStoreBase.Static.EntitySchema.scriptTypeByType;
     

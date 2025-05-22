@@ -21,8 +21,8 @@ public interface ITag { }
 
 
 /// <summary>
-/// If entity <see cref="Entity.Enabled"/> == false it is tagged with <see cref="Disabled"/>.<br/>
+/// If entity <see cref="Entity.Enabled"/> == false it is tagged with <see cref="DisabledTag"/>.<br/>
 /// Disabled entities are excluded from query results by default. To include use <see cref="ArchetypeQuery.WithDisabled"/>.
 /// </summary>
 [ComponentSymbol("D", "150,150,150")]
-public struct Disabled : ITag { };
+public struct DisabledTag : ITag { };
