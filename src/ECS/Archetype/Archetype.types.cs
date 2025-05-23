@@ -8,9 +8,6 @@ namespace Friflo.Engine.ECS;
 
 internal struct StandardComponents
 {
-    internal    StructHeap<PositionCmp>    position;   // 8
-    internal    StructHeap<RotationCmp>    rotation;   // 8
-    internal    StructHeap<Scale3Cmp>      scale3;     // 8
     internal    StructHeap<EntityNameCmp>  name;       // 8
 }
 

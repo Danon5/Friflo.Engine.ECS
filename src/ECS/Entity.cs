@@ -265,63 +265,13 @@ public readonly partial struct Entity : IEquatable<Entity>, IComparable<Entity>
         throw EntityNullException();
     } }
     
-    /// <summary>Returns the <see cref="PositionCmp"/> reference of an entity.</summary>
-    /// <exception cref="NullReferenceException"> if entity has no <see cref="Position"/></exception>
-    [Browse(Never)] public  ref PositionCmp        Position { get {
-        var node = store.nodes[Id];
-        if (node.IsAlive(Revision)) {
-            return ref node.archetype.std.position.components[node.compIndex];
-        }
-        throw EntityNullException();
-    } }
-    
-    /// <summary>Returns the <see cref="RotationCmp"/> reference of an entity.</summary>
-    /// <exception cref="NullReferenceException"> if entity has no <see cref="Rotation"/></exception>
-    [Browse(Never)] public  ref RotationCmp        Rotation { get {
-        var node = store.nodes[Id];
-        if (node.IsAlive(Revision)) {
-            return ref node.archetype.std.rotation.components[node.compIndex];
-        }
-        throw EntityNullException();
-    } }
-    
-    /// <summary>Returns the <see cref="Scale3Cmp"/> reference of an entity.</summary>
-    /// <exception cref="NullReferenceException"> if entity has no <see cref="Scale3"/></exception>
-    [Browse(Never)] public  ref Scale3Cmp          Scale3 { get {
-        var node = store.nodes[Id];
-        if (node.IsAlive(Revision)) {
-            return ref node.archetype.std.scale3.components[node.compIndex];
-        }
-        throw EntityNullException();
-    } }
-    
     /// <summary>Returns true if the entity has an <see cref="EntityNameCmp"/>.</summary>
     [Browse(Never)] public  bool                HasName { get {
         var type = GetArchetype() ?? throw EntityNullException();
         return type.std.name != null;
     } }
     
-    /// <summary>Returns true if the entity has a <see cref="PositionCmp"/>.</summary>
-    [Browse(Never)] public  bool                HasPosition { get {
-        var type = GetArchetype() ?? throw EntityNullException();
-        return type.std.position != null;
-    } }
-    
-    /// <summary>Returns true if the entity has a <see cref="RotationCmp"/>.</summary>
-    [Browse(Never)] public  bool                HasRotation { get {
-        var type = GetArchetype() ?? throw EntityNullException();
-        return type.std.rotation != null;
-    } }
-    
-    /// <summary>Returns true if the entity has a <see cref="Scale3Cmp"/>.</summary>
-    [Browse(Never)] public  bool                HasScale3 { get {
-        var type = GetArchetype() ?? throw EntityNullException();
-        return type.std.scale3 != null;
-    } }
     #endregion
-
-
-
 
     // ------------------------------------ child / tree properties -------------------------------
 #region child / tree - properties

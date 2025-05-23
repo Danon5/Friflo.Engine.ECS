@@ -227,13 +227,7 @@ public sealed class Archetype
     private static void SetStandardComponentHeaps(StructHeap heap, ref StandardComponents std)
     {
         var type = heap.StructType;
-        if        (type == typeof(PositionCmp)) {
-            std.position    = (StructHeap<PositionCmp>)    heap;
-        } else if (type == typeof(RotationCmp)) {
-            std.rotation    = (StructHeap<RotationCmp>)    heap;
-        } else if (type == typeof(Scale3Cmp)) {
-            std.scale3      = (StructHeap<Scale3Cmp>)      heap;
-        } else if (type == typeof(EntityNameCmp)) {
+        if (type == typeof(EntityNameCmp)) {
             std.name        = (StructHeap<EntityNameCmp>)  heap;
         }
     }

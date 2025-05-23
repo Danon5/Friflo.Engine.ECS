@@ -97,10 +97,6 @@ A type initializer threw an exception. To determine which type, inspect the Inne
 
         // components
         RegisterComponent<EntityNameCmp>();
-        RegisterComponent<PositionCmp>();
-        RegisterComponent<RotationCmp>();
-        RegisterComponent<Scale3Cmp>();
-        RegisterComponent<TransformCmp>();
         RegisterComponent<TreeNodeCmp>();
         
         // indexed components
